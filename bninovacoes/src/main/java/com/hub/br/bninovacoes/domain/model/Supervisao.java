@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "supervisao")
 @Entity(name = "supervisao")
-//TODO: perguntar pro arthur oq é supervisao
 public class Supervisao {
 
     @Id

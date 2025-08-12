@@ -46,7 +46,7 @@ public class Atendimento {
 
     private LocalDateTime marcado;
 
-    private String tipoAtendimento;//TODO:perguntar pro arthur oq é tipo atendimento
+    private String tipoAtendimento;
 
     @ManyToOne
     @JoinColumn(name = "especialidade_id")

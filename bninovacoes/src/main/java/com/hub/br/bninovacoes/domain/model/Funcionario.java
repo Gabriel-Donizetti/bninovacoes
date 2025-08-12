@@ -1,6 +1,6 @@
 package com.hub.br.bninovacoes.domain.model;
 
-import com.hub.br.bninovacoes.application.admin.representation.FuncionarioDto;
+import com.hub.br.bninovacoes.application.admin.representation.ClinicaDto.FuncionarioDto;
 import com.hub.br.bninovacoes.domain.enuns.Funcao;
 import com.hub.br.bninovacoes.domain.enuns.Situacao;
 import jakarta.persistence.*;
@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name = "funcionario")
 @Table(name = "funcionario")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Funcionario extends User {
@@ -47,10 +47,6 @@ public class Funcionario extends User {
     @CollectionTable(name = "funcionario_funcoes", joinColumns = @JoinColumn(name = "funcionario_id"))
     @Column(name = "funcao")
     private Set<Funcao> funcoes = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "clinica_id")
-    private Clinica clinica;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

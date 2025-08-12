@@ -1,4 +1,4 @@
-package com.hub.br.bninovacoes.application.admin.representation;
+package com.hub.br.bninovacoes.application.admin.representation.ClinicaDto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,10 +1,16 @@
 package com.hub.br.bninovacoes.application.admin;
 
-import java.util.Map;
+import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.hub.br.bninovacoes.application.admin.representation.CreateClinicaDto;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.hub.br.bninovacoes.application.admin.representation.AdminDto.CreateAdminDto;
+import com.hub.br.bninovacoes.application.admin.representation.ClinicaDto.CreateClinicaDto;
+import com.hub.br.bninovacoes.application.utils.ErrorDto;
+import com.hub.br.bninovacoes.application.utils.ResponseDto;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -17,21 +23,56 @@ public class AdminController {
     @PostMapping("/clinica")
     public ResponseEntity<?> createClinica(@RequestBody @Valid CreateClinicaDto dto) {
         try {
-            return ResponseEntity.ok(Map.of("data", service.create(dto)));
+
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(service.createClinica(dto))
+                    .toUri();
+
+            return ResponseEntity.created(uri).body(new ResponseDto("Clínica criada"));
 
         } catch (Exception e) {
-            return ResponseEntity.status(409).body(e.getMessage());
+            return ResponseEntity.status(409).body(new ErrorDto(e.getMessage()));
         }
     }
 
     @PostMapping("/admin")
-    public ResponseEntity<?> createAdmin() {
-        return ResponseEntity.ok("Admin criado");
+    public ResponseEntity<?> createAdmin(@RequestBody @Valid CreateAdminDto dto) {
+        try {
+
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(service.createAdmin(dto))
+                    .toUri();
+
+            return ResponseEntity.created(uri).body(new ResponseDto("Admin criado"));
+
+        } catch (Exception e) {
+
+            return ResponseEntity.status(409).body(new ErrorDto(e.getMessage()));
+        }
     }
 
     @GetMapping("/clinicas")
-    public ResponseEntity<?> getClinicas() {
-        return ResponseEntity.ok("Listagem de clínicas");
+    public ResponseEntity<?> getAllClinicas() {
+
+        try {
+            return ResponseEntity.ok().body(new ResponseDto(service.getAllClinicas()));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/clinicas/{id}")
+    public ResponseEntity<?> getClinicaById(@PathVariable Integer id) {
+
+        try {
+            return ResponseEntity.ok().body(new ResponseDto(service.getClinicaById(id)));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/admins")

@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import com.hub.br.bninovacoes.application.auth.representation.AuthDto;
-import com.hub.br.bninovacoes.application.auth.representation.ErrorDto;
 import com.hub.br.bninovacoes.application.auth.representation.LoginResDto;
+import com.hub.br.bninovacoes.application.utils.ErrorDto;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

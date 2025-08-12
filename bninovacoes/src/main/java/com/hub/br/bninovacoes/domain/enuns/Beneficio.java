@@ -8,5 +8,5 @@ public enum Beneficio {
     VR,
     VT,
     PLANO_ODONTOLOGICO,
-    PLANO_SAUDO;
+    PLANO_SAUDE;
 }

@@ -1,4 +1,4 @@
-package com.hub.br.bninovacoes.application.admin.representation;
+package com.hub.br.bninovacoes.application.admin.representation.ClinicaDto;
 
 import com.hub.br.bninovacoes.domain.enuns.Dias;
 import com.hub.br.bninovacoes.domain.model.Endereco;
