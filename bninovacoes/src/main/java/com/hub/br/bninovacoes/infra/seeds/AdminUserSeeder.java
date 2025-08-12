@@ -1,5 +1,6 @@
 package com.hub.br.bninovacoes.infra.seeds;
 
+import com.hub.br.bninovacoes.domain.enuns.UserRole;
 import com.hub.br.bninovacoes.domain.model.AdminMaster;
 import com.hub.br.bninovacoes.infra.repository.AdminMasterRepository;
 import com.hub.br.bninovacoes.infra.repository.UserRepository;
@@ -43,6 +44,7 @@ public class AdminUserSeeder implements CommandLineRunner {
         admin.setNacionalidade("Brasileiro");
         admin.setCriado(LocalDateTime.now());
         admin.setAtualizado(LocalDateTime.now());
+        admin.setRole(UserRole.ADMIN);
         admin.setActive(true);
 
         adminMasterRepository.save(admin);

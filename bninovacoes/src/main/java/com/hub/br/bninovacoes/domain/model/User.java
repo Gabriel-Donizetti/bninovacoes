@@ -111,13 +111,13 @@ public abstract class User implements UserDetails {
     @PreUpdate
     public void defineTipo() {
         if (this instanceof AdminMaster) {
-            this.role = UserRole.ADMIN_MASTER;
+            this.role = UserRole.ADMIN;
         } else if (this instanceof Funcionario) {
-            this.role = UserRole.FUNCIONARIO;
+            this.role = UserRole.USER;
         } else if (this instanceof Paciente) {
-            this.role = UserRole.PACIENTE;
+            this.role = UserRole.USER;
         } else if (this instanceof Responsavel) {
-            this.role = UserRole.RESPONSAVEL;
+            this.role = UserRole.USER;
         }
     }
 }

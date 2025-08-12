@@ -2,7 +2,6 @@ package com.hub.br.bninovacoes.application.admin;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hub.br.bninovacoes.application.admin.representation.CreateClinicaDto;
@@ -40,12 +39,12 @@ public class AdminService {
         }
 
         // Verifica se o usuário já existe
-        if (userRepository.findByEmail(dto.user().login()) != null) {
+        if (userRepository.findByEmail(dto.user().login()).isPresent()) {
             throw new IllegalArgumentException("Usuário com email: " + dto.user().login() + " já existe");
         }
 
         // Verifica se o funcionário já existe
-        if (funcionarioRepository.findByNumPis(dto.user().numPis()) != null) {
+        if (funcionarioRepository.findByNumPis(dto.user().numPis()).isPresent()) {
             throw new IllegalArgumentException("Funcionário com PIS: " + dto.user().numPis() + " já existe");
         }
 
@@ -92,7 +91,7 @@ public class AdminService {
 
         clinicaRepository.save(clinica);
 
-        return "Clínica criada com sucesso";
+        return "Clínica criada";
     }
 
 }

@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
-
 import com.hub.br.bninovacoes.application.admin.representation.CreateClinicaDto;
 
 @NoArgsConstructor

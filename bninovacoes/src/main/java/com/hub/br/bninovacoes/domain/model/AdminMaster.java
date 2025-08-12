@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import com.hub.br.bninovacoes.domain.enuns.UserRole;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -23,6 +26,6 @@ public class AdminMaster extends User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN_MASTER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + UserRole.ADMIN.name()));
     }
 }

@@ -1,5 +1,6 @@
 package com.hub.br.bninovacoes.application.admin;
 
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,10 @@ public class AdminController {
     @PostMapping("/clinica")
     public ResponseEntity<?> createClinica(@RequestBody @Valid CreateClinicaDto dto) {
         try {
-            service.create(dto);
-
-            return ResponseEntity.ok("Clínica criada");
+            return ResponseEntity.ok(Map.of("data", service.create(dto)));
 
         } catch (Exception e) {
-            return ResponseEntity.status(401).body("");
+            return ResponseEntity.status(409).body(e.getMessage());
         }
     }
 
