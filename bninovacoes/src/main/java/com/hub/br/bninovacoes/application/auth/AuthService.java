@@ -23,7 +23,7 @@ public class AuthService {
 
     public String login(AuthDto dto) {
 
-        User user = userRepository.findByEmail(dto.login())
+        User user = userRepository.findByEmailOrLogin(dto.login())
                 .orElseThrow(() -> new UsernameNotFoundException("Credenciais inválidas"));
 
         if (!passwordEncoder.matches(dto.senha(), user.getPassword())) {

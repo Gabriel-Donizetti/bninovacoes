@@ -23,7 +23,7 @@ class UserServiceImpl implements UserService {
     return new UserDetailsService() {
       @Override
       public UserDetails loadUserByUsername(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmailOrLogin(email);
         if (user.isEmpty()) {
           throw new RuntimeException("User not found: " + email);
         }

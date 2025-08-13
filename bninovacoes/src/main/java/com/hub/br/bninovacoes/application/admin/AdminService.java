@@ -40,7 +40,7 @@ public class AdminService {
             throw new IllegalArgumentException("Essa clínica já existe");
         }
 
-        if (userRepository.findByEmail(dto.user().login()).isPresent()) {
+        if (userRepository.findByEmailOrLogin(dto.user().login()).isPresent()) {
             throw new IllegalArgumentException("Usuário com email: " + dto.user().login() + " já existe");
         }
 
@@ -91,7 +91,7 @@ public class AdminService {
 
     public String createAdmin(CreateAdminDto dto) throws Exception {
 
-        if (userRepository.findByEmail(dto.login()).isPresent()) {
+        if (userRepository.findByEmailOrLogin(dto.login()).isPresent()) {
             throw new IllegalArgumentException("Usuário com email: " + dto.login() + " já existe");
         }
 

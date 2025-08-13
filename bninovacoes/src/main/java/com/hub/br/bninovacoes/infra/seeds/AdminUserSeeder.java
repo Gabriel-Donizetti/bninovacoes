@@ -27,7 +27,7 @@ public class AdminUserSeeder implements CommandLineRunner {
 
     private void createAdminMaster() {
 
-        if (userRepository.findByEmail("admin@hub.com.br").isPresent()) {
+        if (userRepository.findByEmailOrLogin("admin@hub.com.br").isPresent()) {
             return;
         }
 
