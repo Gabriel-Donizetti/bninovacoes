@@ -13,20 +13,22 @@ public class FuncionarioService {
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     public String criarfuncionario(FuncionarioDto dto) {
         if (userRepository.findByEmailOrLogin(dto.login()).isPresent()) {
-            throw new IllegalArgumentException("Login:" + dto.login() + " já existe");
+            throw new IllegalArgumentException("Login: " + dto.login() + " já existe");
         }
         if (userRepository.findByEmailOrLogin(dto.email()).isPresent()) {
-            throw new IllegalArgumentException("Email:" + dto.email() + " já existe");
+            throw new IllegalArgumentException("Email: " + dto.email() + " já existe");
         }
         if (userRepository.findByCpf(dto.cpf()).isPresent()) {
-            throw new IllegalArgumentException("Cpf" + dto.cpf() + " já existe");
+            throw new IllegalArgumentException("Cpf " + dto.cpf() + " já existe");
         }
-        if (funcionarioRepository.findByNumPis(dto.numPis()).isPresent()){
-            throw new IllegalArgumentException("Pis" + dto.numPis() + " já existe");
+        if (funcionarioRepository.findByNumPis(dto.numPis()).isPresent()) {
+            throw new IllegalArgumentException("Pis " + dto.numPis() + " já existe");
 
         }
 

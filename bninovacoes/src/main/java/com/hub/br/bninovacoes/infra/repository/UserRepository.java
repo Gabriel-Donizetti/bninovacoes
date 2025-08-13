@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, String> {
     UserDetails findByLogin(String login);
 
-    @Query("SELECT u FROM User u WHERE u.email = :value OR u.login = :value")
+    @Query("SELECT u FROM users u WHERE u.email = :value OR u.login = :value")
     Optional<User> findByEmailOrLogin(@Param("value") String value);
 
     Optional<User> findByCpf(String cpf);
