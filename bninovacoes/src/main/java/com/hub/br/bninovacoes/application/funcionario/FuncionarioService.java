@@ -1,12 +1,13 @@
 package com.hub.br.bninovacoes.application.funcionario;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.hub.br.bninovacoes.application.admin.representation.ClinicaDto.FuncionarioDto;
 import com.hub.br.bninovacoes.domain.model.Funcionario;
 import com.hub.br.bninovacoes.infra.repository.FuncionarioRepository;
 import com.hub.br.bninovacoes.infra.repository.UserRepository;
+import com.hub.br.bninovacoes.infra.utils.Utils;
 
 @Service
 public class FuncionarioService {
@@ -16,6 +17,12 @@ public class FuncionarioService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private Utils utils;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public String criarfuncionario(FuncionarioDto dto) {
         if (userRepository.findByEmailOrLogin(dto.login()).isPresent()) {
@@ -33,7 +40,8 @@ public class FuncionarioService {
         }
 
         Funcionario funcionario = new Funcionario(dto);
-        funcionario.setClinica(null);
+        funcionario.setSenha(passwordEncoder.encode(dto.senha()));
+        funcionario.setClinica(utils.getCurrentClinica());
         funcionarioRepository.save(funcionario);
         return funcionario.getId();
     }

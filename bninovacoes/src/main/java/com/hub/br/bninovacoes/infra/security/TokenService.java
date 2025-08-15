@@ -24,6 +24,8 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("bninovacoes")
+                    .withClaim("user", user.getId())
+                    .withClaim("clinica", user.getClinica() != null ? user.getClinica().getId() : null)
                     .withClaim("authorities", user.getAuthorities().stream()
                             .map(GrantedAuthority::getAuthority)
                             .collect(Collectors.toList()))
@@ -52,4 +54,19 @@ public class TokenService {
     private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
+
+    public Integer getClinicaIdFromToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            var decodedJWT = JWT.require(algorithm)
+                    .withIssuer("bninovacoes")
+                    .build()
+                    .verify(token);
+
+            return decodedJWT.getClaim("clinica").asInt();
+        } catch (JWTVerificationException exception) {
+            throw new RuntimeException("Token inválido ou expirado", exception);
+        }
+    }
+
 }
